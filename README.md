@@ -1,24 +1,90 @@
 # CMDforge
 
-[![CI](https://github.com/sureshreddy197/CMDforge/actions/workflows/ci.yml/badge.svg)](https://github.com/sureshreddy197/CMDforge/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+<div align="center">
 
-CMDforge is a polished Python CLI toolkit and reference implementation for building ergonomic command-line applications.
-It ships as a useful developer utility, and it doubles as a production-quality example of how to structure, package, test, and document a modern terminal-first Python project.
+<h1>CMDforge</h1>
 
-## Why CMDforge?
+<p>
+  <strong>A polished Python CLI toolkit for building ergonomic, terminal-first applications.</strong>
+</p>
 
-- Beautiful Typer-based CLI with thoughtful Rich output
-- Clear environment diagnostics via `cmdforge doctor`
-- A small, robust TOML configuration system stored in the proper user config directory
-- Cache inspection and cleanup commands with safe workflows
-- A real scaffold generator that creates a clean starter CLI project with tests and CI
-- Modern packaging with `pyproject.toml`, Hatchling, Ruff, MyPy, pytest, and pre-commit
-- A maintainable module layout that is easy to learn from and extend
+<p>
+  Build beautiful CLIs, inspect environments, manage config and cache safely, and generate clean starter projects with modern Python tooling.
+</p>
+
+<p>
+  <a href="https://github.com/sureshreddy197/CMDforge/actions/workflows/ci.yml">
+    <img src="https://github.com/sureshreddy197/CMDforge/actions/workflows/ci.yml/badge.svg" alt="CI">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License: MIT">
+  </a>
+  <img src="https://img.shields.io/badge/python-3.10%2B-blue.svg" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/CLI-Typer-7C3AED.svg" alt="Typer">
+  <img src="https://img.shields.io/badge/output-Rich-111827.svg" alt="Rich">
+  <img src="https://img.shields.io/badge/style-modern-success.svg" alt="Modern Python Project">
+</p>
+
+<p>
+  <a href="#why-cmdforge">Why CMDforge</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#quickstart">Quickstart</a> •
+  <a href="#commands">Commands</a> •
+  <a href="#configuration">Configuration</a> •
+  <a href="#generated-scaffold">Generated Scaffold</a> •
+  <a href="#development-setup">Development</a>
+</p>
+
+</div>
+
+---
+
+## Why CMDforge
+
+CMDforge is both:
+
+- a **useful developer utility**
+- a **production-quality reference implementation**
+- a **clean starter foundation** for terminal-first Python projects
+
+It is intentionally small, practical, and maintainable, while still demonstrating the standards you would expect from a modern Python codebase.
+
+### Highlights
+
+- **Beautiful CLI UX** with Typer and thoughtful Rich output
+- **Helpful diagnostics** via `cmdforge doctor`
+- **Proper config storage** using platform-specific user config directories
+- **Safe cache workflows** with clear inspection and cleanup commands
+- **Real scaffold generation** for new CLI apps with tests and CI
+- **Modern packaging and tooling** with `pyproject.toml`, Hatchling, Ruff, MyPy, pytest, and pre-commit
+- **Readable structure** that is easy to learn from and extend
+
+---
+
+## At a glance
+
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <h3>🛠 Built for developers</h3>
+      <p>Useful immediately as a CLI utility, while also serving as a high-quality project template.</p>
+    </td>
+    <td width="33%" valign="top">
+      <h3>✨ Great terminal UX</h3>
+      <p>Typer-based commands and polished Rich output make the interface clear and pleasant to use.</p>
+    </td>
+    <td width="33%" valign="top">
+      <h3>📦 Modern by default</h3>
+      <p>Comes with packaging, linting, formatting, typing, tests, and optional CI scaffolding.</p>
+    </td>
+  </tr>
+</table>
+
+---
 
 ## Installation
 
-### With `uv`
+### Using `uv`
 
 ```bash
 uv tool install .
@@ -33,7 +99,7 @@ source .venv/bin/activate
 uv pip install -e ".[dev]"
 ```
 
-### With `pip`
+### Using `pip`
 
 ```bash
 python -m pip install .
@@ -46,7 +112,11 @@ For editable development installs:
 python -m pip install -e ".[dev]"
 ```
 
+---
+
 ## Quickstart
+
+Run a few commands to see what CMDforge offers:
 
 ```bash
 cmdforge about
@@ -56,7 +126,7 @@ cmdforge config show
 cmdforge init hello-cli
 ```
 
-Example output-focused workflows:
+Example workflows:
 
 ```bash
 cmdforge config set scaffold_license Apache-2.0
@@ -66,37 +136,61 @@ cmdforge cache clear --yes
 cmdforge init internal-tools --directory ./examples/internal-tools
 ```
 
+### What it feels like
+
+```bash
+$ cmdforge doctor
+
+Python Version     3.12.x
+Platform           macOS-14.x-arm64
+Executable         /Users/you/.local/bin/cmdforge
+Package Version    0.x.x
+Config Path        ~/.config/cmdforge/config.toml
+Cache Path         ~/.cache/cmdforge
+```
+
+---
+
 ## Commands
 
 ### Core commands
 
-- `cmdforge about` — show project overview, version, summary, and repository URL
-- `cmdforge version` — print the installed package version cleanly
-- `cmdforge doctor` — inspect Python, platform, executable path, package version, config path, and cache path
-- `cmdforge init <project_name>` — generate a complete Typer CLI starter project
+| Command | Description |
+|---|---|
+| `cmdforge about` | Show project overview, version, summary, and repository URL |
+| `cmdforge version` | Print the installed package version cleanly |
+| `cmdforge doctor` | Inspect Python, platform, executable path, package version, config path, and cache path |
+| `cmdforge init <project_name>` | Generate a complete Typer CLI starter project |
 
 ### Configuration commands
 
-- `cmdforge config show`
-- `cmdforge config get <key>`
-- `cmdforge config set <key> <value>`
-- `cmdforge config reset [--yes]`
+```bash
+cmdforge config show
+cmdforge config get <key>
+cmdforge config set <key> <value>
+cmdforge config reset [--yes]
+```
 
 ### Cache commands
 
-- `cmdforge cache info`
-- `cmdforge cache clear [--yes]`
+```bash
+cmdforge cache info
+cmdforge cache clear [--yes]
+```
+
+---
 
 ## Configuration
 
-CMDforge stores user settings in a TOML file inside the platform-appropriate config directory provided by `platformdirs`.
-The file lives at:
+CMDforge stores user settings in a TOML file located in the platform-appropriate config directory provided by `platformdirs`.
 
-- Linux: `~/.config/cmdforge/config.toml`
-- macOS: `~/Library/Application Support/cmdforge/config.toml`
-- Windows: `%APPDATA%\cmdforge\config.toml`
+### Config file location
 
-Supported keys:
+- **Linux**: `~/.config/cmdforge/config.toml`
+- **macOS**: `~/Library/Application Support/cmdforge/config.toml`
+- **Windows**: `%APPDATA%\cmdforge\config.toml`
+
+### Supported keys
 
 - `color_system`
 - `confirm_destructive_actions`
@@ -104,7 +198,7 @@ Supported keys:
 - `scaffold_include_github_actions`
 - `scaffold_include_pre_commit`
 
-Examples:
+### Examples
 
 ```bash
 cmdforge config show
@@ -114,30 +208,53 @@ cmdforge config set scaffold_license BSD-3-Clause
 cmdforge config reset --yes
 ```
 
-Supported scaffold licenses are:
+### Supported scaffold licenses
 
 - `MIT`
 - `Apache-2.0`
 - `BSD-3-Clause`
 
-## Generated scaffold
+---
 
-`cmdforge init` creates a clean starter repository with a practical baseline:
+## Generated Scaffold
 
-- `pyproject.toml`
-- `README.md`
-- `LICENSE`
-- `.gitignore`
-- `.editorconfig`
-- optional `.pre-commit-config.yaml`
-- optional `.github/workflows/ci.yml`
-- `src/<package>/cli.py`
-- `src/<package>/__main__.py`
-- tests for the generated CLI
+`cmdforge init` creates a clean starter repository with a practical baseline.
 
-The generated project is intentionally small, readable, and ready to extend.
+### Generated files
 
-## Development setup
+```text
+your-project/
+├── .editorconfig
+├── .gitignore
+├── LICENSE
+├── README.md
+├── pyproject.toml
+├── src/
+│   └── your_package/
+│       ├── __main__.py
+│       └── cli.py
+└── tests/
+```
+
+### Optional extras
+
+- `.pre-commit-config.yaml`
+- `.github/workflows/ci.yml`
+
+### What the scaffold gives you
+
+- a **small, readable project layout**
+- a **Typer-based CLI entrypoint**
+- **tests** for the generated application
+- **modern packaging defaults**
+- optional **GitHub Actions CI**
+- optional **pre-commit** setup
+
+---
+
+## Development Setup
+
+### With `uv`
 
 ```bash
 uv venv
@@ -146,14 +263,20 @@ uv pip install -e ".[dev]"
 pre-commit install
 ```
 
-Or with standard tooling:
+### With standard Python tooling
 
 ```bash
 python -m pip install -e ".[dev]"
 pre-commit install
 ```
 
-## Testing, linting, formatting, and type checking
+---
+
+## Quality Checks
+
+CMDforge includes a modern quality toolchain for testing, linting, formatting, and type checking.
+
+### Make targets
 
 ```bash
 make test
@@ -163,7 +286,7 @@ make typecheck
 make check
 ```
 
-Equivalent direct commands:
+### Equivalent direct commands
 
 ```bash
 pytest
@@ -172,7 +295,9 @@ ruff format --check .
 mypy src/cmdforge
 ```
 
-## Project structure
+---
+
+## Project Structure
 
 ```text
 CMDforge/
@@ -191,6 +316,8 @@ CMDforge/
 └── tests/
 ```
 
+---
+
 ## Documentation
 
 Additional documentation lives in `docs/`:
@@ -198,13 +325,30 @@ Additional documentation lives in `docs/`:
 - [`docs/architecture.md`](docs/architecture.md)
 - [`docs/development.md`](docs/development.md)
 
-## Contributing
+---
 
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+## Who this project is for
 
-## Security
+CMDforge is a strong fit if you want to:
 
-If you discover a security issue, please follow the guidance in [SECURITY.md](SECURITY.md).
+- build a **Python CLI with excellent UX**
+- study a **real-world project structure**
+- bootstrap a new tool with **modern defaults**
+- learn how Typer, Rich, pytest, Ruff, MyPy, and Hatchling work together
+- keep your codebase **small, clean, and production-minded**
+
+---
+
+## Example use cases
+
+- Internal developer tooling
+- Team productivity CLIs
+- Operational command suites
+- Diagnostic utilities
+- Project bootstrapping tools
+- Small automation-focused terminal apps
+
+---
 
 ## Roadmap
 
@@ -214,6 +358,22 @@ Ideas that fit the project well without bloating it:
 - export formats for diagnostics and config
 - richer scaffold presets for libraries versus applications
 - plugin hooks for additional internal developer tooling
+
+---
+
+## Contributing
+
+Contributions are welcome.
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+---
+
+## Security
+
+If you discover a security issue, please follow the guidance in [SECURITY.md](SECURITY.md).
+
+---
 
 ## License
 
